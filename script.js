@@ -1,3 +1,7 @@
+console.log("Script is loaded");
+
+// print('ex',{title:"", desc:null, input:, func:, proto:});
+
 // EXERCISE 1
 const foods = [];
 print('ex1',{title:"Define an empty array", desc:"Create an empty array and assign it to a variable called <em>foods</em>.<br><em>Example only; Completed for me</em>", input:"none", func:foods, proto:foods.constructor.name})
@@ -104,4 +108,49 @@ print('ex15-C',{title:"Nested array sum", desc:"<em>I'm not sure if it wants a s
 
 function print(ex,obj) {
     console.log(`Exercise ${ex.replace('ex','')} Result: ${obj.func}`);
+    drawCard(ex,obj);
 }
+
+function drawCard(ex,obj) {
+    try {
+        console.log("Draw ", ex)
+        const card = document.createElement('div');
+            card.id = ex;
+            card.classList.add('card');
+            const exercise = document.createElement('h2');
+            exercise.innerHTML = `Exercise ${ex.replace('ex','')}`;
+            card.append(exercise);
+        const title = document.createElement('h3');
+            title.innerHTML = obj.title;
+            card.append(title);
+        const descHead = document.createElement('h4');
+            descHead.innerHTML = "Description:";
+            card.append(descHead);
+        const description = document.createElement('p');
+            description.innerHTML = obj.desc;
+            card.append(description);
+        const content = document.createElement('section');
+        const inputInfo = document.createElement('p');
+            inputInfo.innerHTML = `<span>Input:</span> ${obj.input}`;
+            content.append(inputInfo);
+        const result = document.createElement('p');
+            result.innerHTML = `<span>Result:</span> ${obj.func}`;
+            result.classList.add('result');
+            result.append(obj.func);
+            content.append(result);
+        const protoHead = document.createElement('h4');
+            protoHead.innerHTML = "My Code:";
+            content.append(protoHead);
+        const prototype = document.createElement('p');
+            prototype.innerHTML = obj.proto;
+            content.append(prototype);
+    
+        card.append(content);
+        document.querySelector('body').append(card);
+    }
+    catch {
+        console.warn("No document detected.");
+    }
+}
+
+document.getElementById('loading').remove();
